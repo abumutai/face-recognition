@@ -28,18 +28,16 @@
         <label>Password *</label>
         <input type="password" class="form-control p_input" name="password">
       </div>
-      <div class="form-group d-flex align-items-center justify-content-between">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input"> Remember me </label>
-        </div>
+      {{-- <div class="form-group d-flex align-items-center justify-content-between">
         <a href="#" class="forgot-pass">Forgot password</a>
-      </div>
+      </div> --}}
       <div class="text-center">
         <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+       
       </div>
      
-      <p class="sign-up">Don't have an Account?<a href="{{route('register')}}"> Sign Up</a></p>
+      <p class="sign-up mb-3">Don't have an Account?<a href="{{route('register')}}"> Sign Up</a></p>
+      <a href="{{route('scans.create')}}" class="btn btn-primary btn-block enter-btn">Verification</a>
     </form>
-  </div>
+</div>
 @endsection

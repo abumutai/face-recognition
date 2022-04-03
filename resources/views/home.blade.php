@@ -22,7 +22,7 @@
             <div class="row">
               <div class="col-9">
                 <div class="d-flex align-items-center align-self-start">
-                  <h3 class="mb-0">0</h3>
+                  <h3 class="mb-0">{{$scans->count()}}</h3>
                 </div>
               </div>
               <div class="col-3">
@@ -41,7 +41,7 @@
             <div class="row">
               <div class="col-9">
                 <div class="d-flex align-items-center align-self-start">
-                  <h3 class="mb-0">0</h3>
+                  <h3 class="mb-0">{{$scans->where('status',1)->count()}}</h3>
                 
                 </div>
               </div>
@@ -61,7 +61,7 @@
             <div class="row">
               <div class="col-9">
                 <div class="d-flex align-items-center align-self-start">
-                  <h3 class="mb-0">0</h3>
+                  <h3 class="mb-0">{{$scans->where('status',0)->count()}}</h3>
                
                 </div>
               </div>
@@ -81,8 +81,7 @@
             <div class="row">
               <div class="col-9">
                 <div class="d-flex align-items-center align-self-start">
-                  <h3 class="mb-0">0%</h3>
-                
+                  <h3 class="mb-0">{{number_format((float)$scans->where('status',1)->count()/$scans->count()*100, 2, '.', '')}}%</h3> 
                 </div>
               </div>
               <div class="col-3">
@@ -106,13 +105,22 @@
                 <thead>
                   <tr>
                     <th> Scan ID </th>
-                    <th> Location </th>
                     <th> Scan Date </th>
                     <th> Scan Status </th>
                   </tr>
                 </thead>
                 <tbody>
-
+                  @forelse ($scans as $item)
+                    <tr>
+                      <td>{{$item->id}}</td>
+                      <td>{{$item->created_at}}</td>
+                      <td class="text-{{$item->status == 1 ? 'success' : 'danger'}}">{{$item->status == 1 ? 'Success' : 'Failed'}}</td>
+                    </tr>
+                  @empty
+                      <tr>
+                        <td>No scans to display</td>
+                      </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>
